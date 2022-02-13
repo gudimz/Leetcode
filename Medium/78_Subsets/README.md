@@ -15,7 +15,7 @@ Input: nums = [0]
 Output: [[],[0]]
 ```
 
-***Constraints:***
+**Constraints:**
 
 ```
 1 <= nums.length <= 10
