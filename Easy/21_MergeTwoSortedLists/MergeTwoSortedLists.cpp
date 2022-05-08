@@ -11,27 +11,20 @@ struct ListNode {
 class Solution {
 public:
 	ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-		ListNode* resList;
-		for (; ;) {
-			if (!list1 && !list2) {
-				break;
-			}
-			if (!list1) {
-				resList->next = list2;
-				list2 = list2->next;
-			} else if (!list2) {
-				resList->next = list1;
-				list1 = list1->next;
-			} else if (list1->val < list2->val) {
-				resList->next = list1;
-				list1 = list1->next;
-			} else {
-				resList->next = list2;
-				list2 = list2->next;
-			}
-			resList = resList->next;
+		if (!list1) {
+			return list2;
 		}
-		resList->next = nullptr;
-		return resList;
+		if (!list2) {
+			return list1;
+		}
+		ListNode* resultList = nullptr;
+		if (list1->val > list2->val) {
+			resultList = list2;
+			resultList->next = mergeTwoLists(list1, list2 = list2->next);
+		} else {
+			resultList = list1;
+			resultList->next = mergeTwoLists(list1 = list1->next, list2);
+		}
+		return resultList;
 	}
 };
